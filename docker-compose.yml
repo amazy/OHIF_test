@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 3335:8042
+    depends_on:
+      - orthanc
+      - ohif
+    restart: unless-stopped
+
+  orthanc:
+    #image: jodogne/orthanc-plugins:latest
+    image: osimis/orthanc:latest
+    hostname: orthanc
+    environment:
+      ORTHANC__NAME: "OpenERS"
+      OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED: "true"
+      # you must enable the StoneViewer and the DicomWeb plugins
+      STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
+      DICOM_WEB_PLUGIN_ENABLED: "true"
+      # StoneViewer configurations
+      ORTHANC__STONE_WEB_VIEWER__DATE_FORMAT: "DD/MM/YYYY"
+    volumes:
+      # Config
+      - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
+      # Persist data
+      - ./volumes/orthanc-db/:/var/lib/orthanc/db/
+      # - "orthanc-data:/var/lib/orthanc/db"
+    # ports:
+      # - '4242:4242' # DICOM
+    restart: unless-stopped
+ 
+  ohif:
+    image: ohif/viewer
+    volumes:
+      - "./config/test-config.js:/usr/share/nginx/html/app-config.js"
+    ports:
+      - "3336:80"
+    depends_on:
+      - orthanc
+    restart: unless-stopped
+
+
+# volumes:
+#   orthanc-data:
