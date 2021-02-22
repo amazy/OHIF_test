@@ -12,17 +12,23 @@ services:
     restart: unless-stopped
 
   orthanc:
-    #image: jodogne/orthanc-plugins:latest
+    # image: jodogne/orthanc-plugins:latest
     image: osimis/orthanc:latest
     hostname: orthanc
     environment:
       ORTHANC__NAME: "OpenERS"
       OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED: "true"
+      ORTHANC_WEB_VIEWER_PLUGIN_ENABLED: "true"
       # you must enable the StoneViewer and the DicomWeb plugins
       STONE_WEB_VIEWER_PLUGIN_ENABLED: "true"
       DICOM_WEB_PLUGIN_ENABLED: "true"
+      WSI_PLUGIN_ENABLED: "true"
       # StoneViewer configurations
       ORTHANC__STONE_WEB_VIEWER__DATE_FORMAT: "DD/MM/YYYY"
+      # Expected message origin should match the external url. * can be used as an insecure default
+      ORTHANC__STONE_WEB_VIEWER__EXPECTED_MESSAGE_ORIGIN" : "*"
+      # ORTHANC__STONE_WEB_VIEWER__EXPECTED_MESSAGE_ORIGIN" : "http://localhost:8042"
+      ORTHANC__STONE_WEB_VIEWER__DICOM_CACHE_SIZE" : 250
     volumes:
       # Config
       - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro

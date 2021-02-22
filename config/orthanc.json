@@ -1,8 +1,8 @@
 {
-  "Name": "Orthanc inside Docker",
+  "Name": "OpenERS - Orthanc",
   "StorageDirectory": "/var/lib/orthanc/db",
   "IndexDirectory": "/var/lib/orthanc/db",
-  "StorageCompression": false,
+  "StorageCompression": true,
   "MaximumStorageSize": 0,
   "MaximumPatientCount": 0,
   "LuaScripts": [],
@@ -23,8 +23,10 @@
   "JpegLosslessTransferSyntaxAccepted": true,
   "JpipTransferSyntaxAccepted": true,
   "Mpeg2TransferSyntaxAccepted": true,
+  "Mpeg4TransferSyntaxAccepted": true,
+  "H265TransferSyntaxAccepted" : true,
   "RleTransferSyntaxAccepted": true,
-  "UnknownSopClassAccepted": false,
+  "UnknownSopClassAccepted": true,
   "DicomScpTimeout": 30,
 
   "RemoteAccessAllowed": true,
@@ -72,7 +74,7 @@
   "SaveJobs": true,
   "OverwriteInstances": false,
   "MediaArchiveSize": 1,
-  "StorageAccessOnFind": "Always",
+  "StorageAccessOnFind": "Answers",
   "MetricsEnabled": true,
 
   "DicomWeb": {
@@ -85,5 +87,29 @@
     "StowMaxInstances": 10,
     "StowMaxSize": 10,
     "QidoCaseSensitive": false
+  },
+
+  "WebViewer" : {
+		"WindowingPresets" : [
+			{"Name": "OCT Macula", "WindowCenter": 95, "WindowWidth": 77},
+			{"Name": "Ct Brain", "WindowCenter": 40, "WindowWidth": 80},
+			{"Name": "Ct Angio", "WindowCenter": 300, "WindowWidth": 600}
+		],
+    "ReduceTimelineHeightOnSingleFrameSeries": false,
+    "CombinedToolEnabled": true,
+		"CombinedToolBehaviour" : {
+			"leftMouseButton" : "windowing",
+			"middleMouseButton": "pan",
+			"rightMouseButton": "zoom",
+			"oneTouchPan": "windowing",
+			"twoTouchPan": "pan",
+			"threeTouchPan": null
+		},
+    "DefaultSelectedTool": "combinedTool",
+    "DefaultStudyIslandsDisplayMode": "list",
+    "ShortTermCachePrefetchOnInstanceStored": true,
+    "InstanceInfoCacheEnabled": true,
+    "ShowInfoPopupAtStartup": "never",
+    "ShowInfoPopupButtonEnabled" : false
   }
 }
