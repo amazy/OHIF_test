@@ -8,15 +8,34 @@ window.config = {
     dicomWeb: [
       {
         name: 'Orthanc',
-        wadoUriRoot: 'http://localhost:8042/wado',
-        qidoRoot: 'http://localhost:8042/dicom-web',
-        wadoRoot: 'http://localhost:8042/dicom-web',
+        wadoUriRoot: 'http://oe.toukan.co:3335/wado',
+        qidoRoot: 'http://oe.toukan.co:3335/dicom-web',
+        wadoRoot: 'http://oe.toukan.co:3335/dicom-web',
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
         enableStudyLazyLoad: true,
         supportsFuzzyMatching: true,
       },
     ],
+  },
+  whiteLabeling: {
+    /* Optional: Should return a React component to be rendered in the "Logo" section of the application's Top Navigation bar */
+    createLogoComponentFn: function(React) {
+      return React.createElement('a', {
+        target: '_self',
+        rel: 'noopener noreferrer',
+        className: 'header-brand',
+        href: '/',
+        style: {
+          display: 'block',
+          textIndent: '-9999px',
+          background: 'url(https://db3pap001files.storage.live.com/y4mz90Tmzd52Rl8BIj2gLqkuDSSMG1M7JVEMGDKgOaT5oJbd40TTETkXaHaggRNgAvtETLdOdafF5HkxvkCSvHGFeSlHEF_nkOeBExzTDMdXr3ic1ICtWiGsYU0-ZFhoYtzbDviZ7R_LQdNl-sBEX8g5Cn5dX6hAhzCEcjAwVp1RlU?width=256&height=75&cropmode=none)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          width: '200px',
+        },
+      });
+    },
   },
   // Extensions should be able to suggest default values for these?
   // Or we can require that these be explicitly set
@@ -116,13 +135,6 @@ window.config = {
     },
   ],
   cornerstoneExtensionConfig: {},
-  extensions: [
-    VTK.js,
-    [
-      MySecondExtension,
-      { /* MySecondExtensions Configuration */ },
-    ],
-  ],
   // Following property limits number of simultaneous series metadata requests.
   // For http/1.x-only servers, set this to 5 or less to improve
   //  on first meaningful display in viewer
@@ -130,5 +142,5 @@ window.config = {
   //  requests as it extracts the metadata from raw files everytime,
   //  try setting this to even lower value
   // Leave it undefined for no limit, sutiable for HTTP/2 enabled servers
-  // maxConcurrentMetadataRequests: 5,
+  maxConcurrentMetadataRequests: 5,
 };
