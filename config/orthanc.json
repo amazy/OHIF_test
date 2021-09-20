@@ -1,5 +1,5 @@
 {
-  "Name": "OpenERS - Orthanc",
+  "Name": "OpenERSAI - Orthanc",
   "StorageDirectory": "/var/lib/orthanc/db",
   "IndexDirectory": "/var/lib/orthanc/db",
   "StorageCompression": true,
