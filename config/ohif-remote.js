@@ -142,5 +142,5 @@ window.config = {
   //  requests as it extracts the metadata from raw files everytime,
   //  try setting this to even lower value
   // Leave it undefined for no limit, sutiable for HTTP/2 enabled servers
-  maxConcurrentMetadataRequests: 5,
+  maxConcurrentMetadataRequests: 10,
 };

@@ -18,6 +18,7 @@ services:
       MYSQL_USER: "orthanc"
       MYSQL_PASSWORD: "orthanc"
       MYSQL_ROOT_PASSWORD: "testing123"
+    restart: unless-stopped
     command:
       - "--max_allowed_packet=500M"
     volumes:
@@ -67,8 +68,11 @@ services:
       - db
  
   ohif:
-    image: ohif/viewer
+    # image: ohif/viewer
+    build: https://github.com/OHIF/Viewers.git
     volumes:
+      # NOTE: Supply the reference to an OHIF config file in a .env file as OHIF_CONFIG.
+      # This config file is environment specific as it needs urls/ip addresses including
       - "./config/${OHIF_CONFIG:-ohif-remote.js}:/usr/share/nginx/html/app-config.js"
     ports:
       - "3336:80"
