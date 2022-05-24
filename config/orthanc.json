@@ -111,10 +111,5 @@
     "InstanceInfoCacheEnabled": true,
     "ShowInfoPopupAtStartup": "never",
     "ShowInfoPopupButtonEnabled" : false
-  },
-  "MySQL" : {
-    "EnableIndex" : true,
-    "EnableStorage" : true,
-    "Lock" : false
   }
 }
