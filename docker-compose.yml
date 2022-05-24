@@ -52,9 +52,8 @@ services:
       ORTHANC__MYSQL__ENABLESSL: "false"
       ORTHANC__MYSQL__SSLVERIFYSERVERCERTIFICATES: "true"
       ORTHANC__MYSQL__SSLCACERTIFICATES: ""
-      # The following 2 settings do not appear to be recognised, so are also in the orthanc.json config file
-      ORTHANC__MYSQL__ENABLEINDEX: "true"
-      ORTHANC__MYSQL__ENABLESTORAGE: "true"
+      ORTHANC__MYSQL__ENABLE_INDEX: "true"
+      ORTHANC__MYSQL__ENABLE_STORAGE: "true"
     volumes:
       # Config
       - ./config/orthanc.json:/etc/orthanc/orthanc.json:ro
